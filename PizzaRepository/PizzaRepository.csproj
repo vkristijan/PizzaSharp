@@ -50,9 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SqlRepositories\CommentSqlRepository.cs" />
-    <Compile Include="DrinkSqlRepository.cs" />
+    <Compile Include="SqlRepositories\DrinkSqlRepository.cs" />
     <Compile Include="Interfaces\ICommentRepository.cs" />
-    <Compile Include="IDrinkRepository.cs" />
+    <Compile Include="Interfaces\IDrinkRepository.cs" />
     <Compile Include="IIngredientRepository.cs" />
     <Compile Include="IItemRepository.cs" />
     <Compile Include="IngredientSqlRepository.cs" />

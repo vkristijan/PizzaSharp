@@ -13,21 +13,18 @@ namespace PizzaSharp.Models
         public Guid User { get; set; }
         public virtual List<Comment> Comments { get; set; }
         public virtual List<Review> Reviews { get; set; }
-        public bool isCreatedByAdmin { get; set; }
+        public bool IsCreatedByAdmin { get; set; }
 
         public void UpdateValues(Pizza other)
         {
-            if(this.ProductId != other.ProductId  ||  this.User != other.User)
+            if(ProductId != other.ProductId  ||  User != other.User)
             {
                 throw new ArgumentException("Not allowed to update given pizza!");
             }
 
-            this.Name = other.Name;
-            this.Ingredients = other.Ingredients;
-            this.PhotoName = other.PhotoName;
-            this.PriceBig = other.PriceBig;
-            this.PriceMedium = other.PriceMedium;
-            this.PriceSmall = other.PriceSmall;
+            Ingredients = other.Ingredients;
+
+            base.UpdateValues(other);
         }
     }
 }
