@@ -15,11 +15,12 @@ namespace PizzaSharp.Models
         private double _mediumModifier = 1;
         private double _bigModifier = 1.2;
 
-        public List<Ingredient> Ingredients {get; set;}
         public Guid User { get; set; }
-        public virtual List<Comment> Comments { get; set; }
-        public virtual List<Review> Reviews { get; set; }
         public bool IsCreatedByAdmin { get; set; }
+
+        public virtual List<Ingredient> Ingredients {get; set;}
+        public virtual List<Review> Reviews { get; set; }
+        public virtual List<Comment> Comments { get; set; }
 
         public void UpdateValues(Pizza other)
         {

@@ -6,8 +6,9 @@ namespace PizzaSharp.Models
     {
         public Guid CommentId { get; set; }
         public string Text { get; set; }
-        public Pizza Pizza { get; set; }
         public Guid User { get; set; }
+
+        public virtual Pizza Pizza { get; set; }
 
         public void UpdateValues(Comment comment)
         {
