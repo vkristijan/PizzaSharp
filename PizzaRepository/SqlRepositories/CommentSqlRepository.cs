@@ -22,15 +22,15 @@ namespace PizzaSharp.SqlRepositories
                 throw new ArgumentNullException(nameof(comment));
             }
 
-            Comment oldReview = Get(comment.Pizza.ProductId, userId);
+            Comment oldComment = Get(comment.Pizza.ProductId, userId);
 
-            if (oldReview == null)
+            if (oldComment == null)
             {
                 _context.Comments.Add(comment);
             }
             else
             {
-                oldReview.UpdateValues(comment);
+                oldComment.UpdateValues(comment);
             }
             _context.SaveChanges();
         }
