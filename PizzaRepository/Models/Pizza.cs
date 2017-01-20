@@ -14,5 +14,18 @@ namespace PizzaSharp.Models
         public List<Comment> Comments { get; set; }
         public List<Review> Reviews { get; set; }
 
+        public void UpdateValues(Pizza other)
+        {
+            this.Name = other.Name;
+            this.Comments = other.Comments;
+            this.Ingredients = other.Ingredients;
+            this.PhotoName = other.PhotoName;
+            this.PriceBig = other.PriceBig;
+            this.PriceMedium = other.PriceMedium;
+            this.PriceSmall = other.PriceSmall;
+            this.ProductId = other.ProductId;
+            this.Reviews = other.Reviews;
+            this.User = other.User;
+        }
     }
 }
