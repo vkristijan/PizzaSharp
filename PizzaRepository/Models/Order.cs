@@ -17,5 +17,13 @@ namespace PizzaSharp.Models
         public string DeliveryAddress { get; set; }
         public bool Delivery { get; set; }
 
+        public void UpdateValues(Order order)
+        {
+            Items = order.Items;
+            Delivery = order.Delivery;
+            DeliveryAddress = order.DeliveryAddress;
+            DeliveryDate = order.DeliveryDate;
+            DeliveryMessage = DeliveryMessage;
+        }
     }
 }
