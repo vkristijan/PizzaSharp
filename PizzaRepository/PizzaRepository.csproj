@@ -49,6 +49,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommentSqlRepository.cs" />
+    <Compile Include="DrinkSqlRepository.cs" />
+    <Compile Include="ICommentRepository.cs" />
+    <Compile Include="IDrinkRepository.cs" />
+    <Compile Include="IIngredientRepository.cs" />
+    <Compile Include="IItemRepository.cs" />
+    <Compile Include="IngredientSqlRepository.cs" />
+    <Compile Include="IOrderRepository.cs" />
+    <Compile Include="IProductRepository.cs" />
+    <Compile Include="IReviewRepository.cs" />
+    <Compile Include="ItemSqlRepository.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Drink.cs" />
     <Compile Include="Models\Ingredient.cs" />
@@ -58,9 +69,12 @@
     <Compile Include="Models\Pizza.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Review.cs" />
+    <Compile Include="OrderSqlRepository.cs" />
     <Compile Include="PizzaDbContext.cs" />
     <Compile Include="PizzaSqlRepository.cs" />
+    <Compile Include="ProductSqlRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReviewSqlRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
