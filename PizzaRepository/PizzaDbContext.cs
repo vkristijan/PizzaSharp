@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using PizzaSharp.Models;
 
 namespace PizzaSharp
 {
-    public class PizzaDbContext : System.Data.Entity.DbContext
+    public class PizzaDbContext : DbContext
     {
         public PizzaDbContext(string connectionString) : base(connectionString)
         {
@@ -45,16 +40,15 @@ namespace PizzaSharp
             modelBuilder.Entity<Ingredient>().Property(s => s.Price).IsRequired();
 
             // ORDER
-            modelBuilder.Entity<Order>().HasKey(s => s.User);
-            modelBuilder.Entity<Order>().HasKey(s => s.DateCreated);
-            modelBuilder.Entity<Order>().HasMany(s => s.Items);
+            modelBuilder.Entity<Order>().HasKey(s => s.OrderId);
+            modelBuilder.Entity<Order>().HasMany(s => s.Items).WithRequired(s => s.Order);
             modelBuilder.Entity<Order>().Property(s => s.DeliveryAddress).IsRequired();
             modelBuilder.Entity<Order>().Property(s => s.Delivery).IsOptional();            
             modelBuilder.Entity<Order>().Property(s => s.DeliveryDate).IsOptional();
             modelBuilder.Entity<Order>().Property(s => s.DeliveryMessage).IsOptional();
 
             // ITEM
-            modelBuilder.Entity<Item>().HasKey(s => s.Product);
+            modelBuilder.Entity<Item>().HasKey(s => s.ItemId);
             modelBuilder.Entity<Item>().Property(s => s.Size).IsRequired();
             modelBuilder.Entity<Item>().Property(s => s.Amount).IsRequired();
 

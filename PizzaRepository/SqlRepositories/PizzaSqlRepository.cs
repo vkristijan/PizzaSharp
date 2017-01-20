@@ -1,13 +1,12 @@
-﻿using PizzaSharp.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PizzaSharp.Interfaces;
+using PizzaSharp.Models;
 
-namespace PizzaSharp
+namespace PizzaSharp.SqlRepositories
 {
-    class PizzaSqlRepository : IPizzaRepository
+    public class PizzaSqlRepository : IPizzaRepository
     {
         private readonly PizzaDbContext _context;
 
@@ -50,7 +49,7 @@ namespace PizzaSharp
                 return _context
                     .Products
                     .OfType<Pizza>()                
-                    .Where(s => s.User == user || s.isCreatedByAdmin)
+                    .Where(s => s.User == user || s.IsCreatedByAdmin)
                     .ToList();
         }    
 

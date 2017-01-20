@@ -21,7 +21,7 @@ namespace PizzaSharp.Interfaces
         /// <summary>
         /// Returns a list of all the comments for the given pizza.
         /// </summary>
-        /// <param name="pizza">The pizza that we want to get the comments for.</param>
+        /// <param name="pizzaId">The pizza that we want to get the comments for.</param>
         /// <returns>A list of all the comments.</returns>
         List<Comment> GetAll(Guid pizzaId);
     }

@@ -1,8 +1,8 @@
-﻿using PizzaSharp.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using PizzaSharp.Models;
 
-namespace PizzaSharp
+namespace PizzaSharp.Interfaces
 {
     public interface IPizzaRepository
     {

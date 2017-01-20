@@ -19,7 +19,7 @@ namespace PizzaSharp.SqlRepositories
         {
             if (comment == null)
             {
-                throw new ArgumentNullException("The given comment is null!");
+                throw new ArgumentNullException(nameof(comment));
             }
 
             Comment oldReview = Get(comment.Pizza.ProductId, userId);

@@ -19,7 +19,7 @@ namespace PizzaSharp.SqlRepositories
         {
             if (review == null)
             {
-                throw new ArgumentNullException("The given review is null!");
+                throw new ArgumentNullException(nameof(review));
             }
 
             Review oldReview = Get(review.Pizza.ProductId, userId);

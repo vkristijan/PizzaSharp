@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Sizes.cs" />
     <Compile Include="SqlRepositories\CommentSqlRepository.cs" />
     <Compile Include="SqlRepositories\DrinkSqlRepository.cs" />
     <Compile Include="Interfaces\ICommentRepository.cs" />

@@ -21,7 +21,7 @@ namespace PizzaSharp.Interfaces
         /// <summary>
         /// Returns a list of all the reviews for a given pizza.
         /// </summary>
-        /// <param name="pizza">The pizza that we want to get the reviews for.</param>
+        /// <param name="pizzaId">The pizza that we want to get the reviews for.</param>
         /// <returns>A list of all the reviews for the given pizza. </returns>
         List<Review> GetAll(Guid pizzaId);
     }

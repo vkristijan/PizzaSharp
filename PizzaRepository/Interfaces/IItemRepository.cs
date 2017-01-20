@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PizzaSharp.Models;
 
-namespace PizzaSharp
+namespace PizzaSharp.Interfaces
 {
-    public class IItemRepository 
+    public interface IItemRepository
     {
+        void Add(Item item);
+        Item Get(Guid itemId);
+        List<Item> GetAll(Guid orderId);
+        bool Remove(Item item);
     }
 }

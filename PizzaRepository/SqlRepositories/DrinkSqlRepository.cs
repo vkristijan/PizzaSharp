@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PizzaSharp.Interfaces;
 using PizzaSharp.Models;
 
@@ -10,7 +8,7 @@ namespace PizzaSharp.SqlRepositories
 {
     public class DrinkSqlRepository : IDrinkRepository
     {
-        private PizzaDbContext _context;
+        private readonly PizzaDbContext _context;
 
         public DrinkSqlRepository(PizzaDbContext context)
         {
@@ -29,7 +27,7 @@ namespace PizzaSharp.SqlRepositories
         {
             if (drink == null)
             {
-                throw new ArgumentNullException("The given drink is null!");
+                throw new ArgumentNullException(nameof(drink));
             }
 
             Drink oldDrink = Get(drink.ProductId);

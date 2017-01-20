@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using PizzaSharp.Models;
 using System.Linq;
+using PizzaSharp.Interfaces;
+using PizzaSharp.Models;
 
-namespace PizzaSharp
+namespace PizzaSharp.SqlRepositories
 {
     public class OrderSqlRepository : IOrderRepository
     {
@@ -41,7 +42,7 @@ namespace PizzaSharp
             if (oldOrder.User == userId)
                 oldOrder.UpdateValues(order);
             else
-                throw new ArgumentNullException("The given order doesn't exist!");
+                throw new ArgumentNullException(nameof(userId));
         }
     }
 }
