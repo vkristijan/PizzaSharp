@@ -8,7 +8,7 @@ using PizzaSharp.Models;
 
 namespace PizzaSharp
 {
-    class PizzaDbContext : System.Data.Entity.DbContext
+    public class PizzaDbContext : System.Data.Entity.DbContext
     {
         public PizzaDbContext(string connectionString) : base(connectionString)
         {
@@ -19,7 +19,7 @@ namespace PizzaSharp
         public DbSet<Order> Orders { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Product> Products { get; set; }
-        
+        public DbSet<Review> Reviews { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -32,13 +32,11 @@ namespace PizzaSharp
             modelBuilder.Entity<Pizza>().HasOptional(s => s.Comments);
 
             // COMMENT
-            modelBuilder.Entity<Comment>().HasKey(s => s.Pizza);
-            modelBuilder.Entity<Comment>().HasKey(s => s.User);
+            modelBuilder.Entity<Comment>().HasKey(s => s.CommentId);
             modelBuilder.Entity<Comment>().Property(s => s.Text).IsRequired();
 
             // REVIEW 
-            modelBuilder.Entity<Review>().HasKey(s => s.Pizza);
-            modelBuilder.Entity<Review>().HasKey(s => s.User);
+            modelBuilder.Entity<Review>().HasKey(s => s.ReviewId);
             modelBuilder.Entity<Review>().Property(s => s.Grade).IsRequired();
 
             // INGREDIENT

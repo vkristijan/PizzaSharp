@@ -8,6 +8,7 @@ namespace PizzaSharp.Models
 {
     public class Order
     {
+        public Guid OrderId { get; set; }
         public List<Item> Items { get; set; }
         public DateTime DateCreated { get; set; }
         public Guid User { get; set; }
