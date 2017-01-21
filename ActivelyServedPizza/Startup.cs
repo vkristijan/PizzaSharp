@@ -83,6 +83,8 @@ namespace ActivelyServedPizza
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            ApplicationRoles.CreateRoles(app.ApplicationServices).Wait();
         }
     }
 }

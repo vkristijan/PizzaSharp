@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ActivelyServedPizza.Controllers
@@ -13,6 +14,7 @@ namespace ActivelyServedPizza.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -20,6 +22,7 @@ namespace ActivelyServedPizza.Controllers
             return View();
         }
 
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
