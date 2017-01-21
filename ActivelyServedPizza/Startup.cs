@@ -12,6 +12,9 @@ using Microsoft.Extensions.Logging;
 using ActivelyServedPizza.Data;
 using ActivelyServedPizza.Models;
 using ActivelyServedPizza.Services;
+using PizzaSharp;
+using PizzaSharp.SqlRepositories;
+using PizzaSharp.Interfaces;
 
 namespace ActivelyServedPizza
 {
@@ -52,6 +55,16 @@ namespace ActivelyServedPizza
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            // Database tables
+            services.AddTransient<ICommentRepository, CommentSqlRepository>();
+            services.AddTransient<IDrinkRepository, DrinkSqlRepository>();
+            services.AddTransient<IIngredientRepository, IngredientSqlRepository>();
+            services.AddTransient<IItemRepository, ItemSqlRepository>();
+            services.AddTransient<IOrderRepository, OrderSqlRepository>();
+            services.AddTransient<IPizzaRepository, PizzaSqlRepository>();
+            services.AddTransient<IReviewRepository, ReviewSqlRepository>();
+            services.AddScoped(s => new PizzaDbContext(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
