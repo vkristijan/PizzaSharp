@@ -55,5 +55,11 @@ namespace PizzaSharp.SqlRepositories
                 throw new ArgumentNullException(nameof(userId));
         }
 
+        public void Add(Order order)
+        {
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+        }
+
     }
 }

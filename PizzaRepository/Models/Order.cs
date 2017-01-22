@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PizzaSharp.Models
 {
@@ -22,6 +23,11 @@ namespace PizzaSharp.Models
             DeliveryAddress = order.DeliveryAddress;
             DeliveryDate = order.DeliveryDate;
             DeliveryMessage = DeliveryMessage;
+        }
+
+        public int GetPrice()
+        {
+            return Items.Sum(item => item.CalculatePrice());
         }
     }
 }

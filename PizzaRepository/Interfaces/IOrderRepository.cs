@@ -13,5 +13,7 @@ namespace PizzaSharp.Interfaces
         List<Order> GetAllFromPastWeek();
 
         void Update(Guid userId, Order order);
+
+        void Add(Order order);
     }
 }
