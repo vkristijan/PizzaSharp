@@ -17,10 +17,25 @@ namespace PizzaSharp.Models
 
         public Guid User { get; set; }
         public bool IsCreatedByAdmin { get; set; }
-
         public virtual List<Ingredient> Ingredients {get; set;}
         public virtual List<Review> Reviews { get; set; }
         public virtual List<Comment> Comments { get; set; }
+
+        public int GetRating()
+        {
+            int rating = 0;
+            double sumOfRatings = 0;
+
+            if (Reviews.Count() == 0)
+                return 0;
+
+            foreach (Review review in Reviews)
+                sumOfRatings += review.Grade;
+
+            rating = Convert.ToInt32(sumOfRatings / Reviews.Count());
+
+            return rating;
+        }
 
         public void UpdateValues(Pizza other)
         {
