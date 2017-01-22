@@ -29,6 +29,7 @@ namespace PizzaSharp
             // COMMENT
             modelBuilder.Entity<Comment>().HasKey(s => s.CommentId);
             modelBuilder.Entity<Comment>().Property(s => s.Text).IsRequired();
+            modelBuilder.Entity<Comment>().Property(s => s.Time).IsOptional();
 
             // REVIEW 
             modelBuilder.Entity<Review>().HasKey(s => s.ReviewId);

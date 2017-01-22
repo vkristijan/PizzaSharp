@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using ActivelyServedPizza.Data;
 
-namespace ActivelyServedPizza.Data.Migrations
+namespace ActivelyServedPizza.AppContextMigration
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
