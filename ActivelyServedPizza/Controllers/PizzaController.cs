@@ -36,5 +36,11 @@ namespace ActivelyServedPizza.Controllers
         }
 
 
+        public IActionResult Show(Guid pizzaId)
+        {
+            Pizza pizza = _repository.Get(pizzaId);
+
+            return View(pizza);
+        }
     }
 }
