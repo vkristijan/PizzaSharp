@@ -17,34 +17,55 @@ ViewData["Title"] = "Pizza details";
         <div class="thumbnail">
             <img class="img-responsive" src="~/images/photo1.jpg" alt="">
             <div class="caption-full">
-                <h4 class="pull-right">@Model.PriceMedium kn<sup>*</sup></h4>
-                <div class="text-right">
-                    <a class="btn btn-success">Dodaj<span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h2 class="pull-left">@Model.Name</h2>
+                    </div>                    
+                    <div class="col-md-2 col-md-offset-2">
+                        <div class="text-right">
+                            <a class="btn btn-success btn-block">Dodaj <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                        </div>
+                    </div>
+                         
                 </div>
-                <h4>
-                    <a href="#">@Model.Name</a>
-                    <p>
-                        Ingredients:
-                        <br />
+                <div class="row" style="padding-left:15px">
 
-                        @{bool isFirst = true;}
-                        @foreach (var ingredient in Model.Ingredients)
-                        {
-                            if (!isFirst)
-                            {
-                                <span>, @ingredient.Name</span>
-                            }
-                            else
-                            {
-                                <span>@ingredient.Name</span>
-                                isFirst = false;
-                            }
-                        }
-                    </p>
-                </h4>
+                    <div class="col-md-3">
+                        <h4 class="pull-left">
+                            Cijena male: @Model.PriceSmall kn <br />
+                            Cijena srednje: @Model.PriceMedium kn <br />
+                            Cijena velike: @Model.PriceBig kn <br />
+                            <br />
+
+                            Sastojci: <br />
+                                                  
+                            <p>
+                                @{bool isFirst = true;}
+                                @foreach (var ingredient in Model.Ingredients)
+                                {
+                                    if (!isFirst)
+                                    {
+                                        <span>, @ingredient.Name</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@ingredient.Name</span>
+                                        isFirst = false;
+                                    }
+                                }
+                            </p>
+
+                        </h4>
+                        
+                    </div>
+
+                </div>
+
+
+             
             </div>
             <div class="ratings">
-                <p class="pull-right">@Model.CommentCount() Comments</p>
+                <p class="pull-right">Komentari(@Model.CommentCount())</p>
                 <p>
                     @for (int i = 0; i < Model.GetRating(); i++)
                     {
@@ -60,18 +81,23 @@ ViewData["Title"] = "Pizza details";
             </div>
         </div>
         <div class="well">
-            <div class="text-right">
-                <a class="btn btn-success">Komentiraj</a>
-            </div>
-            <div class="text-right">
-                <a class="btn btn-success">Ocijeni</a>
-            </div>
-            <div>
-            @foreach (var comment in Model.Comments)
-            {
-                @Html.Partial("../Comment/CommentShow", comment)
-            }           
+            <div class="row">
+                <div class="col-md-2 col-md-offset-10">
+                    <div class="text-right">
+                        <a class="btn btn-success btn-block">Komentiraj</a>
+                    </div>
+                    <div class="text-right">
+                        <a class="btn btn-success btn-block">Ocijeni</a>
+                    </div>
+                    <div>
+                        @if (@Model.CommentCount() != 0)
+                        {
+                            @foreach (var comment in Model.Comments)
+                            {
+                                @Html.Partial("../Comment/CommentShow", comment)
+                            }
+                        }
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
