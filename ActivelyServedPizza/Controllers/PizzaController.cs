@@ -25,12 +25,15 @@ namespace ActivelyServedPizza.Controllers
 
         public async Task<IActionResult> Offer()
         {
-            bool isAdmin = false;
-            
-            // check if the user is admin !
-
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
-            List<Pizza> list = _repository.GetAll(Guid.Parse(currentUser.Id), isAdmin);
+            bool isAdmin = await _userManager.IsInRoleAsync(currentUser, Roles.Admin);
+
+            List<Pizza> list = _repository
+                .GetAll(Guid.Parse(currentUser.Id), isAdmin)
+                .OrderBy(p => p.IsCreatedByAdmin)
+                .ToList();
+
+            ApplicationUser userX = await _userManager.FindByIdAsync(currentUser.Id);
 
             return View(list);
         }
