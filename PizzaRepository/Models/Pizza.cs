@@ -26,7 +26,7 @@ namespace PizzaSharp.Models
             int rating = 0;
             double sumOfRatings = 0;
 
-            if (Reviews.Count() == 0)
+            if (Reviews == null || !Reviews.Any())
                 return 0;
 
             foreach (Review review in Reviews)
@@ -56,6 +56,11 @@ namespace PizzaSharp.Models
             PriceSmall = _baseSmall + (int)(_smallModifier * ingredientPrice);
             PriceMedium = _baseMedium + (int)(_mediumModifier * ingredientPrice);
             PriceBig = _baseBig + (int)(_bigModifier * ingredientPrice);
+        }
+
+        public int CommentCount()
+        {
+            return Comments?.Count ?? 0;
         }
     }
 }
