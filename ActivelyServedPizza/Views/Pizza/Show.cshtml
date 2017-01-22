@@ -1,5 +1,5 @@
-﻿@using PizzaSharp.Models
-@model Pizza
+﻿@using ActivelyServedPizza.Models.OrderViewModels
+@model OrderViewModel
 
 @{
 ViewData["Title"] = "Pizza details";
@@ -15,12 +15,31 @@ ViewData["Title"] = "Pizza details";
             <img class="img-responsive" src="~/images/photo1.jpg" alt="">
             <div class="caption-full">
                 <div class="row">
-                    <div class="col-md-8">
-                        <h2 class="pull-left">@Model.Name</h2>
-                    </div>                    
-                    <div class="col-md-2 col-md-offset-2">
+                    <div class="col-md-5">
+                        <h2 class="pull-left">@Model.Pizza.Name</h2>
+                    </div>   
+                    <div class="col-md-2">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Odaberi veličinu
+                                <span class="caret"></span>
+                            </button>
+                            <select asp-for="@Model.Size"  class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <option value="1">Mala></option>
+                                <option value="2">Srednja</option>
+                                <option value="3">Velika></option>                              
+                            </select>
+                        </div>
+                    </div> 
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="sizing-addon1">Količina</span>
+                            <input asp-for="@Model.Amount" type="number" min="1" max="25" step="1" class="form-control" placeholder="1" aria-describedby="sizing-addon2">
+                        </div>
+                    </div>                
+                    <div class="col-md-2">
                         <div class="text-right">
-                            <a class="btn btn-success btn-block">Dodaj <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
+                            <a class="btn btn-success btn-block" asp-action="Offer">Dodaj <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
                         </div>
                     </div>
                 </div>
@@ -28,16 +47,16 @@ ViewData["Title"] = "Pizza details";
 
                     <div class="col-md-3">
                         <h4 class="pull-left">
-                            Cijena male: @Model.PriceSmall kn <br />
-                            Cijena srednje: @Model.PriceMedium kn <br />
-                            Cijena velike: @Model.PriceBig kn <br />
+                            Cijena male: @Model.Pizza.PriceSmall kn <br />
+                            Cijena srednje: @Model.Pizza.PriceMedium kn <br />
+                            Cijena velike: @Model.Pizza.PriceBig kn <br />
                             <br />
 
                             Sastojci: <br />
                                                   
                             <p>
                                 @{bool isFirst = true;}
-                                @foreach (var ingredient in Model.Ingredients)
+                                @foreach (var ingredient in Model.Pizza.Ingredients)
                                 {
                                     if (!isFirst)
                                     {
@@ -61,18 +80,18 @@ ViewData["Title"] = "Pizza details";
              
             </div>
             <div class="ratings">
-                <p class="pull-right">Komentari(@Model.CommentCount())</p>
+                <p class="pull-right">Komentari(@Model.Pizza.CommentCount())</p>
                 <p>
-                    @for (int i = 0; i < Model.GetRating(); i++)
+                    @for (int i = 0; i < Model.Pizza.GetRating(); i++)
                     {
                         <span class="glyphicon glyphicon-star"></span>
                     }
 
-                    @for (int i = 5 - Model.GetRating(); i > 0; i--)
+                    @for (int i = 5 - Model.Pizza.GetRating(); i > 0; i--)
                     {
                         <span class="glyphicon glyphicon-star-empty"></span>
                     }
-                    @Model.GetRating()  
+                    @Model.Pizza.GetRating()  
                 </p>
             </div>
         </div>
@@ -86,9 +105,9 @@ ViewData["Title"] = "Pizza details";
                         <a class="btn btn-success btn-block">Ocijeni</a>
                     </div>
                     <div>
-                        @if (@Model.CommentCount() != 0)
+                        @if (@Model.Pizza.CommentCount() != 0)
                         {
-                            @foreach (var comment in Model.Comments)
+                            @foreach (var comment in Model.Pizza.Comments)
                             {
                                 @Html.Partial("../Comment/CommentShow", comment)
                             }
