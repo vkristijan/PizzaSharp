@@ -10,6 +10,8 @@ namespace PizzaSharp.Models
 
         public virtual Pizza Pizza { get; set; }
 
+        public DateTime Time { get; set; }
+
         public void UpdateValues(Comment comment)
         {
             if (CommentId != comment.CommentId || Pizza.ProductId != comment.Pizza.ProductId || User != comment.User)
@@ -18,6 +20,7 @@ namespace PizzaSharp.Models
             }
 
             Text = comment.Text;
+            Time = comment.Time;
         }
     }
 }

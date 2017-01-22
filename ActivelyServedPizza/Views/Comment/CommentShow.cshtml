@@ -1,0 +1,10 @@
+﻿@model PizzaSharp.Models.Comment
+
+<hr>
+<div class="row">
+    <div class="col-md-12">
+        @Model.User.ToString()
+        <span class="pull-right">@Model.Time</span>
+        <p>@Model.Text</p>
+    </div>
+</div>
