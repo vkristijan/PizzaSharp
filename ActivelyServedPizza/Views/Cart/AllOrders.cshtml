@@ -4,10 +4,13 @@
     ViewData["Title"] = "Sve narudžbe";
 }
 
+<link href="~/css/shop-item.css" rel="stylesheet">
+
+
 <div>
     @foreach (var order in Model)
     {
-        <div>
+        <div class="well">
             @Html.Partial("../Cart/OrderView", order)
         </div>
     }        
