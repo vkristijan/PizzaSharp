@@ -12,7 +12,7 @@ ViewData["Title"] = "Pizza details";
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <div class="thumbnail">
-            <img class="img-responsive" src="~/images/photo1.jpg" alt="">
+            <img class="img-responsive" src="~/images/pizza/@Model.Pizza.PhotoName" alt="" style="height:300px">
             <div class="caption-full">
                 <form method="post" asp-controller="Cart" asp-action="AddToOrder" asp-area="">
                     <div class="row">
