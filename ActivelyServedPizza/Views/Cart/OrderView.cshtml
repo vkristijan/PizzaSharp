@@ -1,0 +1,32 @@
+﻿@using PizzaSharp.Models
+@model Order
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="~/images/order.jpg" alt="">
+        <div class="caption">
+            <h4>
+                R.Br. @Model.OrderId <br />
+                Vrijeme: @Model.DateCreated <br />
+                Adresa: @Model.DeliveryAddress <br />
+                Naručeno: <br />
+                @{bool isFirst = true;}
+                @foreach (var item in Model.Items)
+                {
+                    if (!isFirst)
+                    {
+                        <span>, @item.Product.Name</span>
+                    }
+                    else
+                    {
+                        <span>@item.Product.Name</span>
+                        isFirst = false;
+                    }
+                }  
+                <br />
+                Korisnik: @Model.User        
+            </h4>
+           </div>     
+
+    </div>
+</div>

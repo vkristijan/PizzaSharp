@@ -77,6 +77,18 @@ namespace ActivelyServedPizza.Controllers
             }
 
             return order;
-        } 
+        }
+
+        public async Task<IActionResult> AllOrders(Guid userId)
+        {
+            ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            bool isAdmin = await _userManager.IsInRoleAsync(currentUser, Roles.Admin);
+
+            List<Order> list = _orderRepository
+                .GetAll(Guid.Parse(currentUser.Id), isAdmin)
+                .ToList();
+
+            return View(list);
+        }
     }
 }

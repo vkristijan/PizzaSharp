@@ -1,0 +1,27 @@
+﻿@model List<PizzaSharp.Models.Order>
+
+@{
+    ViewData["Title"] = "Sve narudžbe";
+}
+
+<head>
+    <!-- Custom CSS -->
+    <link href="~/css/shop-homepage.css" rel="stylesheet">
+</head>
+
+<!-- Page Content -->
+<div class="row">
+
+    <div class="col-md-10 col-md-offset-1">
+
+        <div class="row">
+            @foreach (var order in Model)
+            {
+                @Html.Partial("OrderView", order)
+            }
+        </div>
+
+    </div>
+
+</div>
+
