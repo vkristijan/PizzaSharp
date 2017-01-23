@@ -14,35 +14,32 @@ ViewData["Title"] = "Pizza details";
         <div class="thumbnail">
             <img class="img-responsive" src="~/images/photo1.jpg" alt="">
             <div class="caption-full">
-                <div class="row">
-                    <div class="col-md-5">
-                        <h2 class="pull-left">@Model.Pizza.Name</h2>
-                    </div>   
-                    <div class="col-md-2">
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                Odaberi veličinu
-                                <span class="caret"></span>
-                            </button>
-                            <select asp-for="@Model.Size"  class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <option value="1">Mala></option>
+                <form method="post" asp-controller="Cart" asp-action="AddToOrder" asp-area="">
+                    <div class="row">
+                        <input type="hidden" asp-for="@Model.PizzaId" value="@Model.Pizza.ProductId" />
+                        <div class="col-md-5">
+                            <h2 class="pull-left">@Model.Pizza.Name</h2>
+                        </div>
+                        <div class="col-md-2">
+                            <select asp-for="@Model.Size" class="form-control">
+                                <option value="1">Mala</option>
                                 <option value="2">Srednja</option>
-                                <option value="3">Velika></option>                              
+                                <option value="3">Velika</option>
                             </select>
                         </div>
-                    </div> 
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="sizing-addon1">Količina</span>
-                            <input asp-for="@Model.Amount" type="number" min="1" max="25" step="1" class="form-control" placeholder="1" aria-describedby="sizing-addon2">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">Količina</span>
+                                <input asp-for="@Model.Amount" type="number" min="1" max="25" step="1" class="form-control" placeholder="1" aria-describedby="sizing-addon2">
+                            </div>
                         </div>
-                    </div>                
-                    <div class="col-md-2">
-                        <div class="text-right">
-                            <a class="btn btn-success btn-block" asp-action="Offer">Dodaj <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
+                        <div class="col-md-2">
+                            <div class="text-right">
+                                <input type="submit" class="btn btn-success btn-block" value="Dodaj">
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
                 <div class="row" style="padding-left:15px">
 
                     <div class="col-md-3">

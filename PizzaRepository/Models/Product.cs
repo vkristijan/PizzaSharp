@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 
 namespace PizzaSharp.Models
 {
@@ -24,6 +29,14 @@ namespace PizzaSharp.Models
             PriceBig = other.PriceBig;
 
             PhotoName = other.PhotoName;
+        }
+    }
+
+    public class ProductConverter : CustomCreationConverter<Product>
+    {
+        public override Product Create(Type objectType)
+        {
+            return new Pizza();
         }
     }
 }

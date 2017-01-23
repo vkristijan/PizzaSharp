@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ActivelyServedPizza.Models;
+using ActivelyServedPizza.Models.OrderViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.Http;
@@ -13,15 +15,21 @@ using PizzaSharp.Models;
 
 namespace ActivelyServedPizza.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IOrderRepository _orderRepository;
+        private readonly IPizzaRepository _pizzaRepository;
+        private readonly IItemRepository _itemRepository;
 
-        public CartController(UserManager<ApplicationUser> userManager, IOrderRepository orderRepository)
+        public CartController(UserManager<ApplicationUser> userManager, 
+            IOrderRepository orderRepository, IPizzaRepository pizzaRepository, IItemRepository itemRepository)
         {
             _userManager = userManager;
             _orderRepository = orderRepository;
+            _pizzaRepository = pizzaRepository;
+            _itemRepository = itemRepository;
         }
 
 
@@ -40,8 +48,7 @@ namespace ActivelyServedPizza.Controllers
             order.DeliveryAddress = updatedOrder.DeliveryAddress;
             order.DeliveryMessage = updatedOrder.DeliveryMessage;
 
-            var orderString = JsonConvert.SerializeObject(order);
-            HttpContext.Session.SetString("cart", orderString);
+            AddOrder(order);
 
             return RedirectToAction("Index");
         }
@@ -49,10 +56,43 @@ namespace ActivelyServedPizza.Controllers
         public async Task<IActionResult> PlaceOrder()
         {
             Order order = await GetOrder();
+
+            int n = order.Items.Count;
+            for (int i = 0; i < n; ++i)
+            {
+                order.Items[i].Product = _pizzaRepository.Get(order.Items[i].Product.ProductId);
+            }
+
             _orderRepository.Add(order);
             HttpContext.Session.Remove("cart");
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddToOrder(OrderViewModel orderModel)
+        {
+            Order order = await GetOrder();
+
+            Pizza pizza = _pizzaRepository.Get(Guid.Parse(orderModel.PizzaId));
+
+            Item item = new Item();
+            item.Amount = orderModel.Amount;
+            item.ItemId = Guid.NewGuid();
+            item.Product = pizza;
+            item.Size = orderModel.Size;
+
+            order.Items.Add(item);
+
+            AddOrder(order);
+
+            return RedirectToAction("Index");
+        }
+
+        private void AddOrder(Order order)
+        {
+            var orderString = JsonConvert.SerializeObject(order);
+            HttpContext.Session.SetString("cart", orderString);
         }
 
         private async Task<Order> GetOrder()
@@ -73,7 +113,7 @@ namespace ActivelyServedPizza.Controllers
             }
             else
             {
-                order = JsonConvert.DeserializeObject<Order>(sessionString);
+                order = JsonConvert.DeserializeObject<Order>(sessionString, new ProductConverter());
             }
 
             return order;

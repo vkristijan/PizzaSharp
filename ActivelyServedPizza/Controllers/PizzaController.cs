@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ActivelyServedPizza.Models.OrderViewModels;
 
 namespace ActivelyServedPizza.Controllers
 {
@@ -43,7 +44,10 @@ namespace ActivelyServedPizza.Controllers
         {
             Pizza pizza = _repository.Get(pizzaId);
 
-            return View(pizza);
+            OrderViewModel model = new OrderViewModel();
+            model.Pizza = pizza;
+
+            return View(model);
         }
     }
 }
