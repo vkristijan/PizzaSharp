@@ -1,0 +1,49 @@
+﻿@using PizzaSharp.Models
+@model PizzaSharp.Models.Pizza
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="~/images/pizza/@Model.PhotoName" alt="">
+        <div class="caption">
+            <h4 class="pull-right">@Model.PriceMedium kn<sup>*</sup></h4>
+            <h4>
+                <a asp-controller="Pizza" 
+                   asp-action="Show" 
+                   asp-route-pizzaId="@Model.ProductId">@Model.Name</a>
+            </h4>
+            <p>
+                Sastojci:
+                <br />
+                
+                @{bool isFirst = true;}
+                @foreach (var ingredient in Model.Ingredients)
+                {
+                    if (!isFirst)
+                    {
+                        <span>, @ingredient.Name</span>
+                    }
+                    else
+                    {
+                        <span>@ingredient.Name</span>
+                        isFirst = false;
+                    }
+                }
+            </p>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">Komentari(@Model.CommentCount())</p>
+            <p>    
+                @for (int i = 0; i < Model.GetRating(); i++)
+                {
+                    <span class="glyphicon glyphicon-star"></span>
+                }
+
+                @for (int i = 5 - Model.GetRating(); i > 0; i--)
+                {
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                }
+            </p>
+        </div>
+
+    </div>
+</div>

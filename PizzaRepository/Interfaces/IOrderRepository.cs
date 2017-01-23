@@ -10,6 +10,10 @@ namespace PizzaSharp.Interfaces
 
         List<Order> GetAll(Guid userId, bool isAdmin);
 
+        List<Order> GetAllFromPastWeek();
+
         void Update(Guid userId, Order order);
+
+        void Add(Order order);
     }
 }

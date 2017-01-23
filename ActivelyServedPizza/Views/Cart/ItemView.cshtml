@@ -1,0 +1,16 @@
+﻿@model PizzaSharp.Models.Item
+
+<div class="row thumbnail" style="padding-bottom: 15px; padding-top: 15px; padding-left: 15px; padding-right: 15px">
+    <div class="col-md-3">
+        <img src="~/images/pizza/@Model.Product.PhotoName"  alt="Prikaz pizze"/>
+    </div>
+    <div class="col-md-4">
+        <h4><strong>@Model.Product.Name</strong></h4>
+    </div>
+    <div class="col-md-2">
+        <h4>@Model.Amount kom.</h4>
+    </div>
+    <div class="col-md-3">
+        <h4>Veličina: @Model.GetSize()</h4>
+    </div>
+</div>

@@ -34,6 +34,16 @@ namespace PizzaSharp.SqlRepositories
                     .Where(s => s.User == userId)
                     .ToList();
         }
+        public List<Order> GetAllFromPastWeek()
+        {
+            DateTime current = DateTime.Now;
+            DateTime lastWeek = current.AddDays(-7);
+
+            return _context
+                .Orders
+                .Where(o => o.DateCreated > lastWeek)
+                .ToList();
+        }
 
         public void Update(Guid userId, Order order)
         {
@@ -44,5 +54,12 @@ namespace PizzaSharp.SqlRepositories
             else
                 throw new ArgumentNullException(nameof(userId));
         }
+
+        public void Add(Order order)
+        {
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+        }
+
     }
 }

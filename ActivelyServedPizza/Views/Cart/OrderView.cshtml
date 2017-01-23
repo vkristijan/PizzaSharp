@@ -1,0 +1,19 @@
+﻿@using PizzaSharp.Models
+@model Order
+
+
+<div class="caption">
+    <h4>
+        Korisnik: @Model.User <br />
+        R.Br. @Model.OrderId <br />
+        Vrijeme: @Model.DateCreated <br />
+        Adresa: @Model.DeliveryAddress <br />
+        Naručeno: <br />
+        @foreach (var item in Model.Items)
+        {
+            @Html.Partial("../Cart/ItemView", item)
+        }
+        <br />
+    </h4>
+</div>
+

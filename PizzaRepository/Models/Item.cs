@@ -44,5 +44,20 @@ namespace PizzaSharp.Models
 
             return price * Amount;
         }
+
+        public object GetSize()
+        {
+            switch (Size)
+            {
+                case (int)Sizes.Small:
+                    return "Mala";
+                case (int)Sizes.Medium:
+                    return "Srednja";
+                case (int)Sizes.Big:
+                    return "Velika";
+                default:
+                    throw new ArgumentOutOfRangeException($"Given size is invalid!");
+            }
+        }
     }
 }

@@ -1,0 +1,118 @@
+﻿@using ActivelyServedPizza.Models.OrderViewModels
+@model OrderViewModel
+
+@{
+ViewData["Title"] = "Pizza details";
+}
+
+<link href="~/css/shop-item.css" rel="stylesheet">
+
+
+<!-- Page Content -->
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="thumbnail">
+            <img class="img-responsive" src="~/images/pizza/@Model.Pizza.PhotoName" alt="" style="height:300px">
+            <div class="caption-full">
+                <form method="post" asp-controller="Cart" asp-action="AddToOrder" asp-area="">
+                    <div class="row">
+                        <input type="hidden" asp-for="@Model.PizzaId" value="@Model.Pizza.ProductId" />
+                        <div class="col-md-5">
+                            <h2 class="pull-left">@Model.Pizza.Name</h2>
+                        </div>
+                        <div class="col-md-2">
+                            <select asp-for="@Model.Size" class="form-control">
+                                <option value="1">Mala</option>
+                                <option value="2">Srednja</option>
+                                <option value="3">Velika</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">Količina</span>
+                                <input asp-for="@Model.Amount" type="number" min="1" max="25" step="1" class="form-control" placeholder="1" aria-describedby="sizing-addon2">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-right">
+                                <input type="submit" class="btn btn-success btn-block" value="Dodaj">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="row" style="padding-left:15px">
+
+                    <div class="col-md-3">
+                        <h4 class="pull-left">
+                            Cijena male: @Model.Pizza.PriceSmall kn <br />
+                            Cijena srednje: @Model.Pizza.PriceMedium kn <br />
+                            Cijena velike: @Model.Pizza.PriceBig kn <br />
+                            <br />
+
+                            Sastojci: <br />
+                                                  
+                            <p>
+                                @{bool isFirst = true;}
+                                @foreach (var ingredient in Model.Pizza.Ingredients)
+                                {
+                                    if (!isFirst)
+                                    {
+                                        <span>, @ingredient.Name</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@ingredient.Name</span>
+                                        isFirst = false;
+                                    }
+                                }
+                            </p>
+
+                        </h4>
+                        
+                    </div>
+
+                </div>
+
+
+             
+            </div>
+            <div class="ratings">
+                <p class="pull-right">Komentari(@Model.Pizza.CommentCount())</p>
+                <p>
+                    @for (int i = 0; i < Model.Pizza.GetRating(); i++)
+                    {
+                        <span class="glyphicon glyphicon-star"></span>
+                    }
+
+                    @for (int i = 5 - Model.Pizza.GetRating(); i > 0; i--)
+                    {
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                    }
+                    @Model.Pizza.GetRating()  
+                </p>
+            </div>
+        </div>
+        <div class="well">
+            <div class="row">
+                <div class="col-md-2 col-md-offset-10">
+                    <div class="text-right">
+                        <a class="btn btn-success btn-block">Komentiraj</a>
+                    </div>
+                    <div class="text-right">
+                        <a class="btn btn-success btn-block">Ocijeni</a>
+                    </div>
+                    <div>
+                        @if (@Model.Pizza.CommentCount() != 0)
+                        {
+                            @foreach (var comment in Model.Pizza.Comments)
+                            {
+                                @Html.Partial("../Comment/CommentShow", comment)
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "exports": {
+    "PizzaRepository/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.5.2",
+      "compile": {
+        "bin/Debug/PizzaSharp.dll": {}
+      },
+      "runtime": {
+        "../../../../../.nuget/packages/Newtonsoft.Json/9.0.1/lib/net45/Newtonsoft.Json.dll": {},
+        "../packages/EntityFramework.6.1.3/lib/net45/EntityFramework.SqlServer.dll": {},
+        "../packages/EntityFramework.6.1.3/lib/net45/EntityFramework.dll": {},
+        "bin/Debug/PizzaSharp.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/PizzaSharp.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    }
+  }
+}

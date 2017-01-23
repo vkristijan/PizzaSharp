@@ -22,13 +22,14 @@ namespace PizzaSharp
             base.OnModelCreating(modelBuilder);
 
             // PIZZA
-            modelBuilder.Entity<Pizza>().HasMany(s => s.Ingredients);
-            modelBuilder.Entity<Pizza>().HasOptional(s => s.Reviews);
-            modelBuilder.Entity<Pizza>().HasOptional(s => s.Comments);
+            modelBuilder.Entity<Pizza>().HasMany(s => s.Ingredients).WithMany();
+            modelBuilder.Entity<Pizza>().HasOptional(s => s.Reviews).WithRequired();
+            modelBuilder.Entity<Pizza>().HasOptional(s => s.Comments).WithRequired();
 
             // COMMENT
             modelBuilder.Entity<Comment>().HasKey(s => s.CommentId);
             modelBuilder.Entity<Comment>().Property(s => s.Text).IsRequired();
+            modelBuilder.Entity<Comment>().Property(s => s.Time).IsOptional();
 
             // REVIEW 
             modelBuilder.Entity<Review>().HasKey(s => s.ReviewId);
