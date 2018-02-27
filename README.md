@@ -1,4 +1,4 @@
- (# PizzaSharp
+# PizzaSharp
 ### Sustav za online naručivanje pizze.
 
 # Opis projekta
